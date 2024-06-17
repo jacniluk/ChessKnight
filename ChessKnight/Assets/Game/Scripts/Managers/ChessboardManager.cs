@@ -9,6 +9,7 @@ public class ChessboardManager : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private List<SquareController> possibleSquares;
+    [SerializeField] private GameObject squareHighlight;
 
     public static ChessboardManager Instance;
 
@@ -76,5 +77,18 @@ public class ChessboardManager : MonoBehaviour
         float z = a1SquarePosition.y + square.y - 1;
 
         return new Vector3(x, 0.0f, z);
+    }
+
+    public void HighlightSquare(SquareController squareController)
+    {
+        if (squareController == null)
+        {
+            squareHighlight.SetActive(false);
+        }
+        else
+        {
+            squareHighlight.SetActive(true);
+            squareHighlight.transform.position = squareController.transform.position;
+        }
     }
 }
