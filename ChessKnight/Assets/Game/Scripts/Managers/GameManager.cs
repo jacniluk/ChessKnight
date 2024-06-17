@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -10,4 +11,13 @@ public class GameManager : MonoBehaviour
 
 		Application.targetFrameRate = 60;
 	}
+
+    public void Exit()
+    {
+#if UNITY_EDITOR
+        EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
 }
