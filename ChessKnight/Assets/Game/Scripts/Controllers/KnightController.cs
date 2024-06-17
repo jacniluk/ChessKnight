@@ -2,17 +2,29 @@ using UnityEngine;
 
 public class KnightController : MonoBehaviour
 {
-    private Vector2Int chessboardSquare; // e.g. A8 = (1, 8)
+    public static KnightController Instance;
+
+    private Vector2Int square; // e.g. A8 = (1, 8)
 
     private void Awake()
     {
-        chessboardSquare = new Vector2Int(7, 1); // G1
+        Instance = this;
+
+        square = new Vector2Int(7, 1); // G1
     }
 
     private void Start()
     {
-        transform.position = ChessboardManager.Instance.GetPositionBySquare(chessboardSquare);
+        transform.position = ChessboardManager.Instance.GetPositionBySquare(square);
 
-        ChessboardManager.Instance.UpdateChessboard(chessboardSquare);
+        ChessboardManager.Instance.UpdateChessboard(square);
+    }
+
+    public void MoveToSquare(SquareController squareController)
+    {
+        square = squareController.Square;
+        transform.position = squareController.transform.position;
+
+        ChessboardManager.Instance.UpdateChessboard(square);
     }
 }

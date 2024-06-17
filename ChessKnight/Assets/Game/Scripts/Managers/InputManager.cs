@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
+    [Header("Data")]
+    [SerializeField] private LayerMask squareLayerMask;
+
     private void Update()
     {
         UpdateInput();
@@ -9,7 +12,16 @@ public class InputManager : MonoBehaviour
 
     private void UpdateInput()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit raycastHit;
+            if (Physics.Raycast(ray, out raycastHit, Mathf.Infinity, squareLayerMask))
+            {
+                KnightController.Instance.MoveToSquare(raycastHit.transform.GetComponent<SquareController>());
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape))
         {
             GameManager.Instance.Exit();
         }

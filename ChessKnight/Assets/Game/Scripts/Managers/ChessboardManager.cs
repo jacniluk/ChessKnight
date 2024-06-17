@@ -8,7 +8,7 @@ public class ChessboardManager : MonoBehaviour
     [SerializeField] private float squareSize;
 
     [Header("References")]
-    [SerializeField] private List<GameObject> possibleSquares;
+    [SerializeField] private List<SquareController> possibleSquares;
 
     public static ChessboardManager Instance;
 
@@ -38,7 +38,7 @@ public class ChessboardManager : MonoBehaviour
 
         for (int i = 0; i < possibleSquares.Count; i++)
         {
-            possibleSquares[i].SetActive(false);
+            possibleSquares[i].Hide();
         }
 
         Vector2Int square;
@@ -61,10 +61,9 @@ public class ChessboardManager : MonoBehaviour
     {
         for (int i = 0; i < possibleSquares.Count; i++)
         {
-            if (possibleSquares[i].activeSelf == false)
+            if (possibleSquares[i].IsHidden())
             {
-                possibleSquares[i].transform.position = GetPositionBySquare(square);
-                possibleSquares[i].SetActive(true);
+                possibleSquares[i].SetSquare(square, GetPositionBySquare(square));
 
                 return;
             }
