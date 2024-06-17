@@ -33,14 +33,17 @@ public class ChessboardManager : MonoBehaviour
         };
     }
 
-    public void UpdateChessboard(Vector2Int _knightSquare)
+    public void HidePossibleSquares()
     {
-        knightSquare = _knightSquare;
-
         for (int i = 0; i < possibleSquares.Count; i++)
         {
             possibleSquares[i].Hide();
         }
+    }
+
+    public void UpdatePossibleSquares(Vector2Int _knightSquare)
+    {
+        knightSquare = _knightSquare;
 
         Vector2Int square;
         for (int i = 0; i < knightMoveOffsets.Count; i++)
