@@ -60,13 +60,16 @@ public class KnightController : MonoBehaviour
         Quaternion targetRotation = Quaternion.Euler(0, Mathf.Atan2(offset.x, offset.z) * Mathf.Rad2Deg, 0);
         float startTime = Time.realtimeSinceStartup;
         float endTime = startTime + rotateTime;
-        while (Time.realtimeSinceStartup <= endTime)
+        if (startRotation != targetRotation)
         {
-            transform.rotation = Quaternion.Lerp(startRotation, targetRotation, Utilities.CalculateProgress01(Time.realtimeSinceStartup, startTime, endTime));
+            while (Time.realtimeSinceStartup <= endTime)
+            {
+                transform.rotation = Quaternion.Lerp(startRotation, targetRotation, Utilities.CalculateProgress01(Time.realtimeSinceStartup, startTime, endTime));
 
-            yield return null;
+                yield return null;
+            }
+            transform.rotation = targetRotation;
         }
-        transform.rotation = targetRotation;
 
         Vector3 startPosition = transform.position;
         Vector3 targetPosition = transform.position + offset;
