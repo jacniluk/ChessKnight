@@ -48,16 +48,14 @@ public class KnightController : MonoBehaviour
             oneSquareOffset = new Vector3(squareController.transform.position.x - transform.position.x, 0.0f, 0.0f);
         }
 
-        yield return StartCoroutine(JumpCoroutine(squareController, twoSquaresOffset));
-        yield return StartCoroutine(JumpCoroutine(squareController, oneSquareOffset));
+        yield return StartCoroutine(JumpCoroutine(twoSquaresOffset));
+        yield return StartCoroutine(JumpCoroutine(oneSquareOffset));
 
         ChessboardManager.Instance.UpdatePossibleSquares(squareController.Square);
     }
 
-    private IEnumerator JumpCoroutine(SquareController squareController, Vector3 offset)
+    private IEnumerator JumpCoroutine(Vector3 offset)
     {
-        Vector3 startPosition = transform.position;
-        Vector3 targetPosition = transform.position + offset;
         Quaternion startRotation = transform.rotation;
         Quaternion targetRotation = Quaternion.Euler(0, Mathf.Atan2(offset.x, offset.z) * Mathf.Rad2Deg, 0);
         float startTime = Time.realtimeSinceStartup;
@@ -69,6 +67,9 @@ public class KnightController : MonoBehaviour
             yield return null;
         }
         transform.rotation = targetRotation;
+
+        Vector3 startPosition = transform.position;
+        Vector3 targetPosition = transform.position + offset;
         startTime = Time.realtimeSinceStartup;
         endTime = startTime + moveTime;
         while (Time.realtimeSinceStartup <= endTime)
