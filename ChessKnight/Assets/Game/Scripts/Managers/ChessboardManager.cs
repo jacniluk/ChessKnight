@@ -14,7 +14,6 @@ public class ChessboardManager : MonoBehaviour
     public static ChessboardManager Instance;
 
     private List<Vector2Int> knightMoveOffsets;
-    private Vector2Int knightSquare;
 
     private void Awake()
     {
@@ -41,10 +40,8 @@ public class ChessboardManager : MonoBehaviour
         }
     }
 
-    public void UpdatePossibleSquares(Vector2Int _knightSquare)
+    public void UpdatePossibleSquares(Vector2Int knightSquare)
     {
-        knightSquare = _knightSquare;
-
         Vector2Int square;
         for (int i = 0; i < knightMoveOffsets.Count; i++)
         {
@@ -67,14 +64,14 @@ public class ChessboardManager : MonoBehaviour
         {
             if (possibleSquares[i].IsHidden())
             {
-                possibleSquares[i].SetSquare(square, GetPositionBySquare(square));
+                possibleSquares[i].SetSquare(square, GetSquarePosition(square));
 
                 return;
             }
         }
     }
 
-    public Vector3 GetPositionBySquare(Vector2Int square)
+    public Vector3 GetSquarePosition(Vector2Int square)
     {
         float x = a1SquarePosition.x + square.x - 1;
         float z = a1SquarePosition.y + square.y - 1;

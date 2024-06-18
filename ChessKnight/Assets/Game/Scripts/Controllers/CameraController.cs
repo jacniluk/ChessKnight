@@ -6,8 +6,8 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float rotationSpeed;
 
     private Transform cameraPivot;
-    private float mousePosition;
     private float offset;
+    private float mousePosition;
 
     private void Awake()
     {

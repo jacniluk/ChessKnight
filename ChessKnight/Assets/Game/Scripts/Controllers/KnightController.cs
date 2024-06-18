@@ -17,7 +17,7 @@ public class KnightController : MonoBehaviour
     {
         Vector2Int square = new Vector2Int(7, 1); // G1
 
-        transform.position = ChessboardManager.Instance.GetPositionBySquare(square);
+        transform.position = ChessboardManager.Instance.GetSquarePosition(square);
 
         ChessboardManager.Instance.UpdatePossibleSquares(square);
     }

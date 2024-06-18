@@ -10,6 +10,7 @@ public class SquareController : MonoBehaviour
     {
         square = _square;
         transform.position = squarePosition;
+
         gameObject.SetActive(true);
     }
 
