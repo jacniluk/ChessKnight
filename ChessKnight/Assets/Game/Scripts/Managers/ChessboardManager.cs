@@ -73,8 +73,8 @@ public class ChessboardManager : MonoBehaviour
 
     public Vector3 GetSquarePosition(Vector2Int square)
     {
-        float x = a1SquarePosition.x + square.x - 1;
-        float z = a1SquarePosition.y + square.y - 1;
+        float x = a1SquarePosition.x + square.x - squareSize;
+        float z = a1SquarePosition.y + square.y - squareSize;
 
         return new Vector3(x, 0.0f, z);
     }
